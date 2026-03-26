@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Stego Image Viewer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Stego Image</h1>
+
+    <div class="box">
+      <img src="{{ image_url }}" alt="Stego image" style="max-width:100%;height:auto;">
+      <p>Anyone with this link can view only the stego image. To extract the secret file, enter the one-time token below.</p>
+
+      <form action="{{ url_for('decode', stego_id=stego_id) }}" method="post">
+        <label>One-time token:</label><br>
+        <input type="text" name="token" required><br><br>
+        <button type="submit">Decode & Download Secret</button>
+      </form>
+    </div>
+
+    <hr>
+    <a href="{{ url_for('index') }}">Back to Encoder</a>
+  </div>
+</body>
+</html>

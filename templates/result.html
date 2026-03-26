@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Stego Ready</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Stego Image Ready</h1>
+
+    <div class="box">
+      <p><strong>One-Time Token:</strong> <span id="tokenVal">{{ token }}</span></p>
+
+      <p><strong>Shareable Link (stego image):</strong><br>
+      <a id="shareLink" href="{{ share_link }}">{{ share_link }}</a></p>
+
+      <p>
+        <button onclick="copyText(document.getElementById('tokenVal').innerText)">Copy Token</button>
+        <button onclick="copyText(document.getElementById('shareLink').href)">Copy Link</button>
+      </p>
+
+      <p><strong>Share via WhatsApp</strong></p>
+      <p>
+        <!-- share only link -->
+        <a target="_blank" rel="noopener" href="{{ whatsapp_link_only }}">Share link on WhatsApp</a>
+        &nbsp;|&nbsp;
+        <!-- share link + token -->
+        <a target="_blank" rel="noopener" href="{{ whatsapp_link_with_token }}">Share link + token on WhatsApp</a>
+      </p>
+
+      <p class="note">Security note: sharing the token inside WhatsApp is convenient but less secure. For max security, share the token by a different channel (call/SMS) and only send the link on WhatsApp.</p>
+    </div>
+
+    <hr>
+    <a href="{{ url_for('index') }}">Encode Another</a>
+  </div>
+
+<script>
+function copyText(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    alert("Copied to clipboard.");
+  }).catch((e) => {
+    alert("Copy failed: " + e);
+  });
+}
+</script>
+</body>
+</html>
